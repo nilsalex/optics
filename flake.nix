@@ -6,10 +6,7 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs =
@@ -25,8 +22,8 @@
         overlays = [ ];
         pkgs = import nixpkgs { inherit config overlays system; };
       in
-      rec {
-        devShell = pkgs.haskellPackages.shellFor {
+      {
+        devShells.default = pkgs.haskellPackages.shellFor {
           packages =
             p:
             [
